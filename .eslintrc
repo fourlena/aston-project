@@ -1,0 +1,31 @@
+{
+	"extends": ["react-app", "react-app/jest"],
+	"rules": {
+		"no-console": "warn",
+		"@typescript-eslint/no-explicit-any": "error",
+		"quotes": ["error", "single"],
+		"jsx-quotes": ["error", "prefer-double"],
+		"prefer-const": "warn",
+		"semi": ["warn", "always"],
+		"curly": ["error", "all"],
+		"import/prefer-default-export": "off",
+		"react/jsx-no-useless-fragment": "error",
+		"no-unused-expressions": "error",
+		"import/order": [
+			"error",
+			{
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					"parent",
+					"sibling",
+					"index",
+					"object",
+					"type"
+				],
+				"newlines-between": "always-and-inside-groups"
+			}
+		]
+	}
+}
