@@ -1,0 +1,66 @@
+.spotifyPlaylist {
+	min-width: 140px;
+	width: 160px;
+	padding: 15px 15px 0 15px;
+	background-color: #181818;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all ease 0.4s;
+}
+
+.spotifyPlaylist:hover {
+	background-color: #252525;
+}
+
+.albumCover {
+	width: 100%;
+	border-radius: 6px;
+}
+
+.playBtn {
+	position: relative;
+}
+.play {
+	position: absolute;
+	right: 10px;
+	top: -60px;
+	padding: 18px;
+	background-color: #1db954;
+	border-radius: 100%;
+	opacity: 0;
+	transition: all ease 0.4s;
+}
+
+.play:before {
+	content: '\f04b';
+}
+
+.spotifyPlaylist:hover .play {
+	opacity: 1;
+	transform: translateY(-20px);
+}
+
+.title {
+	color: #ffffff;
+	font-size: 15px;
+	margin: 7px 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: left;
+}
+.subtitle {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 37px;
+	margin: 7px 0;
+	color: #989898;
+	font-size: 13px;
+	line-height: 20px;
+	font-weight: 600;
+	text-align: left;
+}

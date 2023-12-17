@@ -1,0 +1,18 @@
+.mainBlock {
+	background-color: #121212;
+	color: #ffff;
+}
+
+h2 {
+	color: #ffffff;
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+
+.spotifyPlaylists {
+	display: flex;
+	gap: 67px;
+	justify-content: center;
+	overflow: hidden;
+	flex-wrap: wrap;
+}
