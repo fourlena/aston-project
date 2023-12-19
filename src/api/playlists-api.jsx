@@ -38,7 +38,7 @@ export const playlistsApi = createApi({
 		getPlaylistsBySearch: build.query({
 			query: search => {
 				return {
-					url: '/search?',
+					url: '/search',
 					params: {
 						q: search,
 						type: 'playlist'
@@ -50,7 +50,7 @@ export const playlistsApi = createApi({
 		getPlaylistsList: build.query({
 			query: (search = '') => {
 				return {
-					url: '/search?',
+					url: '/search',
 					params: {
 						q: search,
 						type: 'playlist',
