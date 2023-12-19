@@ -1,14 +1,18 @@
 import React from 'react';
 
-import { useGetPlaylistsQuery } from '../../api/playlists-api';
+import { useSearchParams } from 'react-router-dom';
 
+import style from '../main/main.module.css';
 import Card from '../../components/card/card';
 import SearchPanel from '../../components/search-panel/search-panel';
+import { useGetPlaylistsBySearchQuery } from '../../api/playlists-api';
 
-import style from './main.module.css';
+const Search = () => {
+	const [searchParams] = useSearchParams();
+	const searchQueryParam = searchParams.get('name');
+	const { data: playlists, isLoading } =
+		useGetPlaylistsBySearchQuery(searchQueryParam);
 
-const Main = () => {
-	const { data: playlists, isLoading } = useGetPlaylistsQuery();
 	if (isLoading) {
 		return <h1>Loading...</h1>;
 	}
@@ -32,4 +36,4 @@ const Main = () => {
 	);
 };
 
-export default Main;
+export default Search;

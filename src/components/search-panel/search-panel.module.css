@@ -1,0 +1,23 @@
+.input {
+	background-color: #242424;
+	border-radius: 500px;
+	color: #fff;
+	height: 48px;
+	padding: 6px 36px;
+	text-overflow: ellipsis;
+	box-sizing: border-box;
+	margin-block: 0px;
+}
+
+.container {
+	position: relative;
+	display: inline-block;
+	right: 31px;
+	top: 5px;
+	cursor: pointer;
+}
+
+svg {
+	fill: #fff;
+	width: 20px;
+}
