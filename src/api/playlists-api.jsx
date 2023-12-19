@@ -24,18 +24,47 @@ const TOKEN = response.access_token;
 export const playlistsApi = createApi({
 	reducerPath: 'playlistsApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'https://api.spotify.com/v1/browse'
+		baseUrl: 'https://api.spotify.com/v1',
+		headers: { Authorization: `Bearer ${TOKEN}` }
 	}),
 
 	endpoints: build => ({
 		getPlaylists: build.query({
 			query: () => ({
-				url: '/featured-playlists',
-				headers: { Authorization: `Bearer ${TOKEN}` }
+				url: '/browse/featured-playlists'
 			}),
+			transformResponse: response => response.playlists.items
+		}),
+		getPlaylistsBySearch: build.query({
+			query: search => {
+				return {
+					url: '/search',
+					params: {
+						q: search,
+						type: 'playlist'
+					}
+				};
+			},
+			transformResponse: response => response.playlists.items
+		}),
+		getPlaylistsList: build.query({
+			query: (search = '') => {
+				return {
+					url: '/search',
+					params: {
+						q: search,
+						type: 'playlist',
+						limit: '5'
+					}
+				};
+			},
 			transformResponse: response => response.playlists.items
 		})
 	})
 });
 
-export const { useGetPlaylistsQuery } = playlistsApi;
+export const {
+	useGetPlaylistsQuery,
+	useGetPlaylistsBySearchQuery,
+	useGetPlaylistsListQuery
+} = playlistsApi;
