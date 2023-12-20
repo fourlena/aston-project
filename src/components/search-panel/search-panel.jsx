@@ -1,18 +1,13 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import SearchList from '../search-list/search-list';
 
 import style from './search-panel.module.css';
-import { searchActions } from './search-panel-reducer';
 
 const SearchPanel = () => {
+	const [searchValue, setSearchValue] = useState('');
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
-
-	const searchValue = useSelector(state => state.search.search);
 
 	const onKeyPressCallback = e => {
 		if (e.key === 'Enter') {
@@ -21,7 +16,7 @@ const SearchPanel = () => {
 	};
 
 	const onChangeCallback = e => {
-		dispatch(searchActions.setSearchValue({ searchValue: e.target.value }));
+		setSearchValue(e.target.value);
 	};
 
 	const onClickCallback = () => {
@@ -41,6 +36,7 @@ const SearchPanel = () => {
 				/>
 				<span className={style.container} onClick={onClickCallback}>
 					<svg
+						className={style.svg}
 						data-encore-id="icon"
 						role="img"
 						aria-hidden="true"

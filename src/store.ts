@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { playlistsApi } from './api/playlists-api';
-import { searchReducer } from './components/search-panel/search-panel-reducer';
+import { favoriteReducer } from './pages/favorite/favorite-reducer';
 
 const rootReducer = combineReducers({
-	search: searchReducer,
+	favorite: favoriteReducer,
 	[playlistsApi.reducerPath]: playlistsApi.reducer
 });
 
