@@ -1,11 +1,12 @@
 .favoriteBtn {
-	position: relative;
+	position: absolute;
+	top: 35px;
+	right: 20px;
 }
 
 .favorite {
 	background-color: #1ed760;
 	cursor: pointer;
-	position: absolute;
 	right: 8px;
 	top: -239px;
 	padding: 18px;

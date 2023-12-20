@@ -4,7 +4,6 @@ import style from './favorite-btn.module.css';
 
 const FavoriteBtn = ({ playlistsFavorite, setFavorite }) => {
 	const svgClass = playlistsFavorite ? ' ' + style.svgActive : ' ' + style.svg;
-	debugger;
 	return (
 		<div className={style.favoriteBtn} onClick={setFavorite}>
 			<span className={style.favorite}>

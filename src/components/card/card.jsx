@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import FavoriteBtn from '../../components/favorite-btn/favorite-btn';
@@ -9,7 +9,6 @@ import style from './card.module.css';
 
 const Card = ({ playlistProps }) => {
 	const dispatch = useDispatch();
-
 	const playlistsFavorite = useSelector(state =>
 		state.favorite.favorites.find(el => el.id === playlistProps.id)
 	);
@@ -30,11 +29,13 @@ const Card = ({ playlistProps }) => {
 
 	return (
 		<div className={style.spotifyPlaylist}>
-			<img
-				className={style.albumCover}
-				src={playlistProps.images[0].url}
-				alt="cover"
-			/>
+			<Link to={`/playlist/${playlistProps.id}`}>
+				<img
+					className={style.albumCover}
+					src={playlistProps.images[0].url}
+					alt="cover"
+				/>
+			</Link>
 			<div className={style.playBtn}>
 				<span className={style.play}>
 					<svg
@@ -48,7 +49,9 @@ const Card = ({ playlistProps }) => {
 					</svg>
 				</span>
 			</div>
-			<h4 className={style.title}>{playlistProps.name}</h4>
+			<Link to={`/playlist/${playlistProps.id}`}>
+				<h4 className={style.title}>{playlistProps.name}</h4>
+			</Link>
 			<p className={style.subtitle}>{playlistProps.description}</p>
 			<FavoriteBtn
 				setFavorite={setFavorite}
