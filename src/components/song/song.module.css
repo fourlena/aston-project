@@ -1,0 +1,14 @@
+.trackContainer {
+	padding: 0.5rem 1rem;
+	display: grid;
+	grid-template-columns: 0.3fr 3.1fr 2fr 0.1fr;
+}
+
+.infoContainer {
+	display: flex;
+}
+
+.img {
+	height: 80px;
+	border-radius: 16px;
+}

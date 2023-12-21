@@ -1,0 +1,27 @@
+.favoriteBtn {
+	position: absolute;
+	top: 35px;
+	right: 20px;
+}
+
+.favorite {
+	background-color: #1ed760;
+	cursor: pointer;
+	right: 8px;
+	top: -239px;
+	padding: 18px;
+	border-radius: 100%;
+	transition: all ease 0.4s;
+	box-sizing: border-box;
+	height: 56px;
+}
+
+.svg {
+	fill: #e8d3d3;
+	width: 20px;
+}
+
+.svgActive {
+	fill: #c90c22;
+	width: 20px;
+}

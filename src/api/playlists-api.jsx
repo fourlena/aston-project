@@ -38,11 +38,7 @@ export const playlistsApi = createApi({
 		getPlaylistsBySearch: build.query({
 			query: search => {
 				return {
-					url: '/search',
-					params: {
-						q: search,
-						type: 'playlist'
-					}
+					url: `/search?q=playlist:${search}&type=playlist`
 				};
 			},
 			transformResponse: response => response.playlists.items
@@ -50,15 +46,19 @@ export const playlistsApi = createApi({
 		getPlaylistsList: build.query({
 			query: (search = '') => {
 				return {
-					url: '/search',
-					params: {
-						q: search,
-						type: 'playlist',
-						limit: '5'
-					}
+					url: `/search?q=playlist:${search}&type=playlist&limit=5`
 				};
 			},
 			transformResponse: response => response.playlists.items
+		}),
+		getPlaylistById: build.query({
+			query: id => {
+				debugger;
+				return {
+					url: `/playlists/${id}`
+				};
+			},
+			transformResponse: response => response
 		})
 	})
 });
@@ -66,5 +66,16 @@ export const playlistsApi = createApi({
 export const {
 	useGetPlaylistsQuery,
 	useGetPlaylistsBySearchQuery,
-	useGetPlaylistsListQuery
+	useGetPlaylistsListQuery,
+	useGetPlaylistByIdQuery
 } = playlistsApi;
+
+// query: search => {
+// 	return {
+// 		url: '/search',
+// 		params: {
+// 			q: search,
+// 			type: 'playlist'
+// 		}
+// 	};
+// },

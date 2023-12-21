@@ -1,4 +1,5 @@
 .spotifyPlaylist {
+	position: relative;
 	min-width: 140px;
 	width: 160px;
 	padding: 15px 15px 0 15px;
@@ -15,6 +16,7 @@
 .albumCover {
 	width: 100%;
 	border-radius: 6px;
+	aspect-ratio: 1;
 }
 
 .playBtn {
@@ -25,14 +27,17 @@
 	right: 10px;
 	top: -60px;
 	padding: 18px;
-	background-color: #1db954;
+	background-color: #1ed760;
 	border-radius: 100%;
 	opacity: 0;
 	transition: all ease 0.4s;
+	box-sizing: border-box;
+	height: 56px;
 }
 
-.play:before {
-	content: '\f04b';
+.svg {
+	fill: #121212;
+	width: 20px;
 }
 
 .spotifyPlaylist:hover .play {
