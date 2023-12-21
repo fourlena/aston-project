@@ -53,7 +53,6 @@ export const playlistsApi = createApi({
 		}),
 		getPlaylistById: build.query({
 			query: id => {
-				debugger;
 				return {
 					url: `/playlists/${id}`
 				};
@@ -69,13 +68,3 @@ export const {
 	useGetPlaylistsListQuery,
 	useGetPlaylistByIdQuery
 } = playlistsApi;
-
-// query: search => {
-// 	return {
-// 		url: '/search',
-// 		params: {
-// 			q: search,
-// 			type: 'playlist'
-// 		}
-// 	};
-// },
