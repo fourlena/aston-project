@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import FavoriteBtn from '../../components/favorite-btn/favorite-btn';
-import { favoriteActions } from '../../pages/favorite/favorite-reducer';
+import { favoriteActions } from '../../redux/slices/favorite-slice';
+
+import {
+	deleteFavoritePlaylist,
+	getDataFromLS
+} from '../../utils/local-storage';
 
 import style from './card.module.css';
 
 const Card = ({ playlistProps }) => {
+	const isAuth = getDataFromLS('isAuth', '""');
+	const isAuthFav = isAuth + 'fav';
+
 	const dispatch = useDispatch();
 	const playlistsFavorite = useSelector(state =>
 		state.favorite.favorites.find(el => el.id === playlistProps.id)
@@ -16,10 +24,11 @@ const Card = ({ playlistProps }) => {
 	const setFavorite = () => {
 		if (playlistsFavorite) {
 			dispatch(
-				favoriteActions.deletePlaylistInFavorite({
+				favoriteActions.deletePlaylistFromFavorite({
 					playlistId: playlistProps.id
 				})
 			);
+			deleteFavoritePlaylist(isAuthFav, playlistProps);
 		} else {
 			dispatch(
 				favoriteActions.addPlaylistInFavorite({ playlist: playlistProps })
@@ -53,10 +62,12 @@ const Card = ({ playlistProps }) => {
 				<h4 className={style.title}>{playlistProps.name}</h4>
 			</Link>
 			<p className={style.subtitle}>{playlistProps.description}</p>
-			<FavoriteBtn
-				setFavorite={setFavorite}
-				playlistsFavorite={playlistsFavorite}
-			/>
+			{isAuth && (
+				<FavoriteBtn
+					setFavorite={setFavorite}
+					playlistsFavorite={playlistsFavorite}
+				/>
+			)}
 		</div>
 	);
 };

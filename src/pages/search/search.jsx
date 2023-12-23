@@ -16,10 +16,8 @@ const Search = () => {
 	if (isLoading) {
 		return <h1>Loading...</h1>;
 	}
-
 	return (
 		<>
-			<div>Header</div>
 			<SearchPanel />
 			<div className={style.mainBlock}>
 				<h2>Spotify Playlists</h2>
@@ -31,7 +29,6 @@ const Search = () => {
 					</div>
 				)}
 			</div>
-			<div>footer</div>
 		</>
 	);
 };

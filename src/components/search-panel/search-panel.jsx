@@ -7,6 +7,7 @@ import style from './search-panel.module.css';
 
 const SearchPanel = () => {
 	const [searchValue, setSearchValue] = useState('');
+	const [error, setError] = useState('');
 	const navigate = useNavigate();
 
 	const onKeyPressCallback = e => {
@@ -20,7 +21,10 @@ const SearchPanel = () => {
 	};
 
 	const onClickCallback = () => {
-		navigate(`/search?name=${searchValue}`);
+		if (searchValue.length) {
+			navigate(`/search?name=${searchValue}`);
+		}
+		setError('Enter playlist name');
 	};
 
 	return (
@@ -47,6 +51,7 @@ const SearchPanel = () => {
 				</span>
 			</div>
 			{searchValue ? <SearchList searchValue={searchValue} /> : ''}
+			{error && <p className={style.error}>{error}</p>}
 		</div>
 	);
 };
