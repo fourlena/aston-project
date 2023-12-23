@@ -38,15 +38,15 @@ export const playlistsApi = createApi({
 		getPlaylistsBySearch: build.query({
 			query: search => {
 				return {
-					url: `/search?q=playlist:${search}&type=playlist`
+					url: `/search?q=${search}&type=playlist`
 				};
 			},
 			transformResponse: response => response.playlists.items
 		}),
 		getPlaylistsList: build.query({
-			query: (search = '') => {
+			query: search => {
 				return {
-					url: `/search?q=playlist:${search}&type=playlist&limit=5`
+					url: `/search?q=${search}&type=playlist&limit=5`
 				};
 			},
 			transformResponse: response => response.playlists.items

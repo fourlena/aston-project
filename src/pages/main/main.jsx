@@ -15,7 +15,6 @@ const Main = () => {
 
 	return (
 		<>
-			<div>Header</div>
 			<SearchPanel />
 			<div className={style.mainBlock}>
 				<h2>Spotify Playlists</h2>
@@ -27,7 +26,6 @@ const Main = () => {
 					</div>
 				)}
 			</div>
-			<div>footer</div>
 		</>
 	);
 };

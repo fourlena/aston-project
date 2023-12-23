@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { key, getDataFromLS } from '../../utils/local-storage';
+
 const initialState = {
-	favorites: []
+	favorites: getDataFromLS(key('fav'), '[]')
 };
 
 const slice = createSlice({
@@ -12,11 +14,17 @@ const slice = createSlice({
 			debugger;
 			state.favorites.push(action.payload.playlist);
 		},
-		deletePlaylistInFavorite(state, action) {
+		deletePlaylistFromFavorite(state, action) {
 			debugger;
 			state.favorites = state.favorites.filter(
 				tl => tl.id !== action.payload.playlistId
 			);
+		},
+		addAllFavoritePlaylist(state, action) {
+			state.favoriteMovies.push(...action.payload.playlist);
+		},
+		clearFavoriteMovies(state) {
+			state.favoriteMovies = [];
 		}
 	}
 });

@@ -1,8 +1,12 @@
-.error {
-    color: red;
-    font-weight: bold;
-    margin: 0;
+.formControl {
+	background-color: white;
 }
-.text{
-    color: red;
+
+.error {
+	color: red;
+	font-weight: bold;
+	margin: 0;
+}
+.text {
+	color: red;
 }

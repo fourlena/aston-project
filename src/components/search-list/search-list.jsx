@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { useGetPlaylistsListQuery } from '../../api/playlists-api';
 
 import style from './search-list.module.css';
@@ -13,7 +15,9 @@ const SearchList = ({ searchValue }) => {
 				<div className={style.resultsList}>
 					{playlists.map(playlist => (
 						<div className={style.searchResult} key={playlist.id}>
-							{playlist.name}
+							<Link className={style.link} to={`/playlist/${playlist.id}`}>
+								{playlist.name}
+							</Link>
 						</div>
 					))}
 				</div>

@@ -37,7 +37,7 @@ const FormC = ({ name, submit }) => {
 		}
 	});
 	return (
-		<form onSubmit={formik.handleSubmit}>
+		<form className={style.formControl} onSubmit={formik.handleSubmit}>
 			<FormControl>
 				<FormLabel>
 					<h1>{name}</h1>

@@ -3,15 +3,22 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { favoriteActions } from '../favorite/favorite-reducer';
+import { favoriteActions } from '../../redux/slices/favorite-slice';
 import { useGetPlaylistByIdQuery } from '../../api/playlists-api';
 
 import FavoriteBtn from '../../components/favorite-btn/favorite-btn';
 import Song from '../../components/song/song';
+import {
+	deleteFavoritePlaylist,
+	getDataFromLS
+} from '../../utils/local-storage';
 
 import style from './playlist.module.css';
 
 const Playlist = () => {
+	const isAuth = getDataFromLS('isAuth', '""');
+	const isAuthFav = isAuth + 'fav';
+
 	const params = useParams();
 	const current = params.id;
 	const dispatch = useDispatch();
@@ -21,22 +28,21 @@ const Playlist = () => {
 	);
 
 	const { data: playlist, isLoading } = useGetPlaylistByIdQuery(current);
-	debugger;
+
 	if (isLoading) {
 		return <h1>Loading...</h1>;
 	}
 
-	const slicedArray = playlist.tracks.items.slice(0, 10);
-
 	const setFavorite = () => {
 		if (playlistsFavorite) {
 			dispatch(
-				favoriteActions.deletePlaylistInFavorite({
+				favoriteActions.deletePlaylistFromFavorite({
 					playlistId: current
 				})
 			);
+			deleteFavoritePlaylist(isAuthFav, playlist);
 		} else {
-			dispatch(favoriteActions.addPlaylistInFavorite({ playlist: current }));
+			dispatch(favoriteActions.addPlaylistInFavorite({ playlist: playlist }));
 		}
 	};
 
@@ -78,10 +84,12 @@ const Playlist = () => {
 									</svg>
 								</span>
 							</div>
-							<FavoriteBtn
-								setFavorite={setFavorite}
-								playlistsFavorite={playlistsFavorite}
-							/>
+							{isAuth && (
+								<FavoriteBtn
+									setFavorite={setFavorite}
+									playlistsFavorite={playlistsFavorite}
+								/>
+							)}
 						</div>
 						<div>
 							<div className={style.trackContainer}>
@@ -89,7 +97,7 @@ const Playlist = () => {
 								<p>TITLE</p>
 								<p>ALBUM</p>
 							</div>
-							{slicedArray.map((el, id) => (
+							{playlist.tracks.items.slice(0, 10).map((el, id) => (
 								<Song key={id} trackProps={el.track} idTrack={id + 1} />
 							))}
 						</div>

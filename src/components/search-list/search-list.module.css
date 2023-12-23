@@ -19,3 +19,8 @@
 .searchResult:hover {
 	background-color: #3d3434;
 }
+
+.link {
+	text-decoration: none;
+	color: white;
+}

@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { playlistsApi } from './api/playlists-api';
-import { favoriteReducer } from './pages/favorite/favorite-reducer';
-import { authReducer } from './pages/login/auth-reducer';
+
+import { favoriteReducer } from './redux/slices/favorite-slice';
+import { LSMiddleware } from './redux/middleware';
 
 const rootReducer = combineReducers({
-	auth: authReducer,
 	favorite: favoriteReducer,
 	[playlistsApi.reducerPath]: playlistsApi.reducer
 });
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
 export const store = configureStore({
 	reducer: rootReducer,
 	middleware: getDefaultMiddleware =>
-		getDefaultMiddleware().concat(playlistsApi.middleware)
+		getDefaultMiddleware().concat(playlistsApi.middleware).concat(LSMiddleware)
 });
 
 // @ts-ignore
