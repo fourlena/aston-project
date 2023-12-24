@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useDebounce } from '../../hooks/use-debounce';
 import SearchList from '../search-list/search-list';
 
 import style from './search-panel.module.css';
 
 const SearchPanel = () => {
 	const [searchValue, setSearchValue] = useState('');
+	const [isFocus, setFocus] = useState(false);
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
+	const debouncedSearch = useDebounce(searchValue, 500);
 
 	const onKeyPressCallback = e => {
 		if (e.key === 'Enter') {
@@ -18,13 +21,21 @@ const SearchPanel = () => {
 
 	const onChangeCallback = e => {
 		setSearchValue(e.target.value);
+		setFocus(true);
 	};
 
 	const onClickCallback = () => {
-		if (searchValue.length) {
-			navigate(`/search?name=${searchValue}`);
+		if (!debouncedSearch) {
+			setError('Enter playlist name');
 		}
-		setError('Enter playlist name');
+		navigate(`/search?name=${debouncedSearch}`);
+	};
+
+	const onFocus = () => {
+		setFocus(true);
+	};
+	const onBlur = () => {
+		setTimeout(() => setFocus(false), 500);
 	};
 
 	return (
@@ -37,6 +48,8 @@ const SearchPanel = () => {
 					type={'text'}
 					onChange={onChangeCallback}
 					onKeyPress={onKeyPressCallback}
+					onFocus={onFocus}
+					onBlur={onBlur}
 				/>
 				<span className={style.container} onClick={onClickCallback}>
 					<svg
@@ -50,7 +63,11 @@ const SearchPanel = () => {
 					</svg>
 				</span>
 			</div>
-			{searchValue ? <SearchList searchValue={searchValue} /> : ''}
+			{debouncedSearch && isFocus ? (
+				<SearchList searchValue={debouncedSearch} />
+			) : (
+				''
+			)}
 			{error && <p className={style.error}>{error}</p>}
 		</div>
 	);

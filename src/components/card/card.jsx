@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import PropTypes from 'prop-types';
 
 import FavoriteBtn from '../../components/favorite-btn/favorite-btn';
 import { favoriteActions } from '../../redux/slices/favorite-slice';
@@ -9,6 +11,7 @@ import {
 	deleteFavoritePlaylist,
 	getDataFromLS
 } from '../../utils/local-storage';
+import { useFavorite } from '../../hooks/use-favorite';
 
 import style from './card.module.css';
 
@@ -17,9 +20,7 @@ const Card = ({ playlistProps }) => {
 	const isAuthFav = isAuth + 'fav';
 
 	const dispatch = useDispatch();
-	const playlistsFavorite = useSelector(state =>
-		state.favorite.favorites.find(el => el.id === playlistProps.id)
-	);
+	const playlistsFavorite = useFavorite(playlistProps.id);
 
 	const setFavorite = () => {
 		if (playlistsFavorite) {
@@ -73,3 +74,12 @@ const Card = ({ playlistProps }) => {
 };
 
 export default Card;
+
+Card.propTypes = {
+	playlistProps: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired,
+		description: PropTypes.string.isRequired,
+		images: PropTypes.arrayOf(PropTypes.object)
+	})
+};

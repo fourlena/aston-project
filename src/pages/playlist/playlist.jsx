@@ -1,17 +1,17 @@
 import React from 'react';
-
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { favoriteActions } from '../../redux/slices/favorite-slice';
 import { useGetPlaylistByIdQuery } from '../../api/playlists-api';
 
+import { favoriteActions } from '../../redux/slices/favorite-slice';
 import FavoriteBtn from '../../components/favorite-btn/favorite-btn';
 import Song from '../../components/song/song';
 import {
 	deleteFavoritePlaylist,
 	getDataFromLS
 } from '../../utils/local-storage';
+import { useFavorite } from '../../hooks/use-favorite';
 
 import style from './playlist.module.css';
 
@@ -22,10 +22,7 @@ const Playlist = () => {
 	const params = useParams();
 	const current = params.id;
 	const dispatch = useDispatch();
-
-	const playlistsFavorite = useSelector(state =>
-		state.favorite.favorites.find(el => el.id === current)
-	);
+	const playlistsFavorite = useFavorite(current);
 
 	const { data: playlist, isLoading } = useGetPlaylistByIdQuery(current);
 

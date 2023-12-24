@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-
 import { Link, useNavigate } from 'react-router-dom';
 
 import { getData, setDataToLS } from '../../utils/local-storage';
-
 import FormC from '../../components/form/form';
 
 import style from '../../components/form/form.module.css';
 
 const Login = () => {
 	const [errorLogin, setErrorLogin] = useState({});
-
 	const navigate = useNavigate();
 
 	const loginF = data => {

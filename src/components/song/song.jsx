@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import style from './song.module.css';
 
@@ -23,3 +24,15 @@ const Song = ({ trackProps, idTrack }) => {
 };
 
 export default Song;
+
+Song.propTypes = {
+	trackProps: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		album: PropTypes.shape({
+			images: PropTypes.arrayOf(PropTypes.object),
+			artists: PropTypes.arrayOf(PropTypes.object),
+			name: PropTypes.string.isRequired
+		})
+	}),
+	idTrack: PropTypes.number.isRequired
+};

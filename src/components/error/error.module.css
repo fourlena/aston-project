@@ -1,0 +1,10 @@
+.error {
+	color: red;
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.link {
+	text-decoration: none;
+	color: #ffffff;
+}

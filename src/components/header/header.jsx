@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { getDataFromLS, removeDataFromLS } from '../../utils/local-storage';
+import { useTheme } from '../../context/theme-provider';
 
 import style from './header.module.css';
 
@@ -15,6 +16,8 @@ const Header = () => {
 		window.location.reload();
 	};
 
+	const { theme, toggleTheme } = useTheme();
+
 	return (
 		<header className={style.header}>
 			<div>
@@ -26,6 +29,9 @@ const Header = () => {
 					/>
 				</Link>
 			</div>
+			<button onClick={toggleTheme}>
+				{theme === 'light' ? <span>Light mode</span> : <span>Dark mode</span>}
+			</button>
 			<nav className={style.navbar}>
 				{isAuth ? (
 					<>
