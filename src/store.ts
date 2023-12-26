@@ -4,9 +4,13 @@ import { playlistsApi } from './api/playlists-api';
 
 import { favoriteReducer } from './redux/slices/favorite-slice';
 import { LSMiddleware } from './redux/middleware';
+import { historyReducer } from './redux/slices/history-slice';
+import { searchReducer } from './redux/slices/search-slice';
 
 const rootReducer = combineReducers({
 	favorite: favoriteReducer,
+	history: historyReducer,
+	search: searchReducer,
 	[playlistsApi.reducerPath]: playlistsApi.reducer
 });
 

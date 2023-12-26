@@ -9,7 +9,8 @@ import { favoriteActions } from '../../redux/slices/favorite-slice';
 
 import {
 	deleteFavoritePlaylist,
-	getDataFromLS
+	getDataFromLS,
+	setDataToLS
 } from '../../utils/local-storage';
 import { useFavorite } from '../../hooks/use-favorite';
 
@@ -34,6 +35,12 @@ const Card = ({ playlistProps }) => {
 			dispatch(
 				favoriteActions.addPlaylistInFavorite({ playlist: playlistProps })
 			);
+			if (!getDataFromLS(isAuthFav, '[]').includes(playlistProps)) {
+				setDataToLS(isAuthFav, [
+					...getDataFromLS(isAuthFav, '""'),
+					playlistProps
+				]);
+			}
 		}
 	};
 

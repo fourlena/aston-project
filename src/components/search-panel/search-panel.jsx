@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useDebounce } from '../../hooks/use-debounce';
 import SearchList from '../search-list/search-list';
+import { historyActions } from '../../redux/slices/history-slice';
+import { getDataFromLS, setDataToLS } from '../../utils/local-storage';
+import { getSearch, searchActions } from '../../redux/slices/search-slice';
 
 import style from './search-panel.module.css';
 
 const SearchPanel = () => {
-	const [searchValue, setSearchValue] = useState('');
+	const isAuth = getDataFromLS('isAuth', '""');
+	const isAuthHistory = isAuth + ' history';
+	const dispatch = useDispatch();
+	const searchValue = useSelector(getSearch);
 	const [isFocus, setFocus] = useState(false);
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
@@ -20,13 +28,24 @@ const SearchPanel = () => {
 	};
 
 	const onChangeCallback = e => {
-		setSearchValue(e.target.value);
+		dispatch(searchActions.setSearchValue({ searchValue: e.target.value }));
 		setFocus(true);
 	};
 
 	const onClickCallback = () => {
 		if (!debouncedSearch) {
 			setError('Enter playlist name');
+		}
+		dispatch(
+			historyActions.addSearchInHistory({
+				search: debouncedSearch
+			})
+		);
+		if (!getDataFromLS(isAuthHistory, '[]').includes(debouncedSearch)) {
+			setDataToLS(isAuthHistory, [
+				...getDataFromLS(isAuthHistory, '""'),
+				debouncedSearch
+			]);
 		}
 		navigate(`/search?name=${debouncedSearch}`);
 	};
